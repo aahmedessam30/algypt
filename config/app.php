@@ -3,6 +3,17 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Api Version
+    |--------------------------------------------------------------------------
+    |
+    | This value is the version of your api. This value is used when the
+    | framework needs to place the api's version in a notification or
+    | any other location as required by the api or its packages.
+    |
+    */
+    'api_version' => env('API_VERSION', 'v1'),
 
     /*
     |--------------------------------------------------------------------------

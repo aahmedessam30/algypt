@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/';
+    public const ADMIN = '/admin';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -25,14 +26,25 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureRateLimiting();
-
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+            $apiVersion = strtolower(str_starts_with(strtolower(request()->segment(1)), 'v')
+                ? request()->segment(1)
+                : (request()->header('X-API-VERSION', 'v1') ?? config('app.api_version', 'v1')));
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+            // API Routes
+            foreach (config('versions.api')[$apiVersion] as $version) {
+                Route::prefix($version['prefix'] ?? "api/$apiVersion")
+                    ->middleware($version['middleware'] ?? 'api')
+                    ->group(base_path("routes/$apiVersion/{$version['file']}.php"));
+            }
+
+            // Web Routes
+            foreach (config('versions.web')[$apiVersion] as $version) {
+                Route::prefix($version['prefix'] ?? '')
+                    ->as(isset($version['prefix']) ? "$version[prefix]." : '')
+                    ->middleware($version['middleware'] ?? 'web')
+                    ->group(base_path("routes/$apiVersion/{$version['file']}.php"));
+            }
         });
     }
 
