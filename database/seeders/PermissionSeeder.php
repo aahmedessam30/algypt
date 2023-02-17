@@ -24,9 +24,7 @@ class PermissionSeeder extends Seeder
                 return str_replace('.', '_', $route);
             })
             ->each(function ($route) {
-                Permission::create([
-                    'name' => $route,
-                ]);
+                Permission::create(['name' => $route]);
             });
     }
 }
