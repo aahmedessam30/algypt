@@ -13,9 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (['admin', 'user', 'guest'] as $role) {
-            Role::create(['name' => $role]);
+        foreach (['admin', 'client'] as $role) {
+            Role::create(['name' => $role, 'guard_name' => $role])->syncPermissions(Permission::whereGuardName($role)->get());
         }
-        Role::findByName('admin')->syncPermissions(Permission::all());
     }
 }
