@@ -1,16 +1,14 @@
 <?php
 
 return [
-    'api' => [
-        'v1' => [
-            ['file' => 'api', 'middleware' => ['api', 'auth:sanctum', 'role:user|guest|admin']],
-        ]
-    ],
-    'web' => [
-        'v1' => [
+    'v1' => [
+        'api' => [
+            ['file' => 'api', 'middleware' => 'api'],
+        ],
+        'web' => [
             ['file' => 'auth'],
             ['file' => 'site'],
-            ['file' => 'admin', 'prefix' => 'admin', 'middleware' => ['web', 'auth', 'role:admin']],
+            ['file' => 'admin', 'prefix' => 'admin', 'middleware' => ['web', 'auth:admin', 'role:admin']],
         ]
     ]
 ];

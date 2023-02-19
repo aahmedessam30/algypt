@@ -29,17 +29,18 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             $apiVersion = strtolower(str_starts_with(strtolower(request()->segment(1)), 'v')
                 ? request()->segment(1)
-                : (request()->header('X-API-VERSION', 'v1') ?? config('app.api_version', 'v1')));
+                : config('app.api_version', 'v1'));
 
             // API Routes
-            foreach (config('versions.api')[$apiVersion] as $version) {
+            foreach (config("versions.$apiVersion.api") as $version) {
                 Route::prefix($version['prefix'] ?? "api/$apiVersion")
+                    ->as("api.")
                     ->middleware($version['middleware'] ?? 'api')
                     ->group(base_path("routes/$apiVersion/{$version['file']}.php"));
             }
 
             // Web Routes
-            foreach (config('versions.web')[$apiVersion] as $version) {
+            foreach (config("versions.$apiVersion.web") as $version) {
                 Route::prefix($version['prefix'] ?? '')
                     ->as(isset($version['prefix']) ? "$version[prefix]." : '')
                     ->middleware($version['middleware'] ?? 'web')
