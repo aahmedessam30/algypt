@@ -14,6 +14,15 @@ class ClientResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id'         => $this->id,
+            'name'       => $this->name,
+            'email'      => $this->email,
+            'address'    => $this->address,
+            'avatar'     => $this->avatar,
+            'phone'      => count($this->phone) > 1 ? PhoneResource::collection($this->phone) : PhoneResource::make($this->phone->first()),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }
