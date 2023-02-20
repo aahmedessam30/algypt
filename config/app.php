@@ -17,6 +17,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Pagination
+    |--------------------------------------------------------------------------
+    |
+    | This value is the number of records per page. This value is used when the
+    | framework needs to place the number of records per page in a notification or
+    | any other location as required by the api or its packages.
+    |
+    */
+    'pagination' => 10,
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |
