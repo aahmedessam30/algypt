@@ -27,7 +27,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
         $this->routes(function () {
-            $apiVersion = strtolower(str_starts_with(strtolower(request()->segment(1)), 'v')
+            $apiMiddleware = ['language', 'pagination', 'timezone', 'api'];
+            $apiVersion    = strtolower(str_starts_with(strtolower(request()->segment(1)), 'v')
                 ? request()->segment(1)
                 : config('app.api_version', 'v1'));
 
@@ -35,7 +36,9 @@ class RouteServiceProvider extends ServiceProvider
             foreach (config("versions.$apiVersion.api") as $version) {
                 Route::prefix($version['prefix'] ?? "api/$apiVersion")
                     ->as("api.")
-                    ->middleware($version['middleware'] ?? 'api')
+                    ->middleware(isset($version['middleware'])
+                        ? $apiMiddleware + (is_array($version['middleware']) ? $version['middleware'] : [$version['middleware']])
+                        : $apiMiddleware)
                     ->group(base_path("routes/$apiVersion/{$version['file']}.php"));
             }
 

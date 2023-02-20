@@ -3,7 +3,7 @@
 return [
     'v1' => [
         'api' => [
-            ['file' => 'api', 'middleware' => 'api'],
+            ['file' => 'api'],
         ],
         'web' => [
             ['file' => 'auth'],
