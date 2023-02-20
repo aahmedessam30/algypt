@@ -31,6 +31,6 @@ class Client extends Authenticatable implements MustVerifyEmail
 
     public function getAvatarAttribute()
     {
-        return $this->media()->whereName('avatar')->first()->getFullUrl();
+        return optional($this->media()->whereName('avatar')->first())->getFullUrl();
     }
 }
