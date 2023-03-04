@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('mime_type');
             $table->string('size');
             $table->string('alt')->nullable();
-            $table->integer('order')->default(0);
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }
