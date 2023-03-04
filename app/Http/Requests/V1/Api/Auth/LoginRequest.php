@@ -22,12 +22,12 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required'    => __('validation.required', ['attribute' => __('validation.attributes.email')]),
-            'email.string'      => __('validation.string', ['attribute' => __('validation.attributes.email')]),
-            'email.email'       => __('validation.email', ['attribute' => __('validation.attributes.email')]),
-            'email.exists'      => __('validation.exists', ['attribute' => __('validation.attributes.email')]),
-            'password.required' => __('validation.required', ['attribute' => __('validation.attributes.password')]),
-            'password.string'   => __('validation.string', ['attribute' => __('validation.attributes.password')]),
+            'email.required'    => __('validation.required', ['attribute' => __('attributes.email')]),
+            'email.string'      => __('validation.string', ['attribute' => __('attributes.email')]),
+            'email.email'       => __('validation.email', ['attribute' => __('attributes.email')]),
+            'email.exists'      => __('validation.exists', ['attribute' => __('attributes.email')]),
+            'password.required' => __('validation.required', ['attribute' => __('attributes.password')]),
+            'password.string'   => __('validation.string', ['attribute' => __('attributes.password')]),
         ];
     }
 }

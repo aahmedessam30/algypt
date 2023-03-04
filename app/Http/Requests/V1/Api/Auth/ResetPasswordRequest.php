@@ -21,9 +21,9 @@ class ResetPasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => __('validation.required', ['attribute' => __('validation.attributes.email')]),
-            'email.email'    => __('validation.email', ['attribute' => __('validation.attributes.email')]),
-            'email.exists'   => __('validation.exists', ['attribute' => __('validation.attributes.email')]),
+            'email.required' => __('validation.required', ['attribute' => __('attributes.email')]),
+            'email.email'    => __('validation.email', ['attribute' => __('attributes.email')]),
+            'email.exists'   => __('validation.exists', ['attribute' => __('attributes.email')]),
         ];
     }
 }
