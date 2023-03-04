@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+
+    // Auth Routes
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
+    Route::post('resend-verification-email', [AuthController::class, 'resendVerificationEmail'])->name('resend-verification-email');
+
+    // Home Route
+    Route::get('/home', [HomeController::class, '__invoke'])->name('home');
+
+    // Client Routes
+    Route::apiResource('clients', ClientController::class);
 });
