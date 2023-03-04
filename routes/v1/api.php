@@ -10,7 +10,6 @@ Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('r
 Route::middleware('auth:sanctum')->group(function () {
 
     // Auth Routes
-    Route::get('profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
     Route::post('resend-verification-email', [AuthController::class, 'resendVerificationEmail'])->name('resend-verification-email');
