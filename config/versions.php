@@ -1,5 +1,14 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| API Versions
+|--------------------------------------------------------------------------
+|
+| Here the API versions are defined. The API version is the first part of the URL.
+| For example, if the API version is v1, the URL will be http://example.com/api/v1/...
+|
+*/
 return [
     'v1' => [
         'api' => [
